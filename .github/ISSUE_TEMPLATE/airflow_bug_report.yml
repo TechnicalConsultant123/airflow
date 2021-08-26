@@ -1,8 +1,13 @@
 ---
-name: Bug report
-description: Problems and issues with code or docs
-labels: ["kind:bug"]
+name: Airflow Bug report
+description: Problems and issues with code of Apache Airflow core
+labels: ["kind:bug", "area:core"]
 body:
+  - type: markdown
+    attributes:
+      value: >
+        You do not need to create issue if you have a change ready to submit! You can opem
+        [Pull Request](https://github.com/apache/airflow/pulls) immediately.
   - type: dropdown
     attributes:
       label: Apache Airflow version
@@ -11,14 +16,14 @@ body:
         discuss Airflow 1.10, open [Discussion](https://github.com/apache/airflow/discussions) instead!
       multiple: false
       options:
-        - "2.1.3 (latest)"
+        - "2.1.3 (latest released)"
         - "2.1.2"
         - "2.1.1"
         - "2.1.0"
         - "2.0.2"
         - "2.0.1"
         - "2.0.0"
-        - "main"
+        - "main (development)"
     validations:
       required: true
   - type: input
@@ -68,7 +73,8 @@ body:
       placeholder: >
         Please explain why you think the behaviour is erroneous. It is extremely helpful if you copy&paste
         the fragment of logs showing the exact error messages or wrong behaviour and screenshots for
-        UI problems or YouTube link to a video of you demonstrating the problem. You can include files by dragging and dropping them here.
+        UI problems or YouTube link to a video of you demonstrating the problem. You can include files by
+        dragging and dropping them here.
   - type: textarea
     attributes:
       label: How to reproduce
@@ -76,9 +82,10 @@ body:
         What should we do to reproduce the problem? If you are not able to provide a reproducible case,
         please open a [Discussion](https://github.com/apache/airflow/discussions) instead.
       placeholder: >
-        Please make sure you provide a reproducible step-by-step case of how to reproduce the problem 
+        Please make sure you provide a reproducible step-by-step case of how to reproduce the problem
         as minimally and precisely as possible. Keep in mind we do not have access to your cluster or DAGs.
-        Remember that non-reproducible issues will be closed! Opening a discussion is recommended as a first step.
+        Remember that non-reproducible issues will be closed! Opening a discussion is recommended as a
+        first step.
   - type: textarea
     attributes:
       label: Anything else

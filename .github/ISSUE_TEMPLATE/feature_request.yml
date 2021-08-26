@@ -1,5 +1,5 @@
 ---
-name: Feature request
+name: Airflow feature request
 description: Suggest an idea for this project or its docs
 labels: ["kind:feature"]
 body:
