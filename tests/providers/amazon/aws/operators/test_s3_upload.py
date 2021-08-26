@@ -25,10 +25,10 @@ import boto3
 from moto import mock_s3
 
 from airflow.models.dag import DAG
-from airflow.providers.amazon.aws.transfers.local_to_s3 import LocalFilesystemToS3Operator
+from airflow.providers.amazon.aws.operators.s3_upload import S3UploadOperator
 
 
-class TestFileToS3Operator(unittest.TestCase):
+class TestUploadS3Operator(unittest.TestCase):
 
     _config = {'verify': False, 'replace': False, 'encrypt': False, 'gzip': False}
 
@@ -45,8 +45,8 @@ class TestFileToS3Operator(unittest.TestCase):
         os.remove(self.testfile1)
 
     def test_init(self):
-        operator = LocalFilesystemToS3Operator(
-            task_id='file_to_s3_operator',
+        operator = S3UploadOperator(
+            task_id='upload_s3_operator',
             dag=self.dag,
             filename=self.testfile1,
             dest_key=self.dest_key,
@@ -63,8 +63,8 @@ class TestFileToS3Operator(unittest.TestCase):
 
     def test_init_exception(self):
         with self.assertRaises(TypeError):
-            LocalFilesystemToS3Operator(
-                task_id='file_to_s3_operatro_exception',
+            S3UploadOperator(
+                task_id='s3_upload_operator_exception',
                 dag=self.dag,
                 filename=self.testfile1,
                 dest_key=f's3://dummy/{self.dest_key}',
@@ -76,7 +76,7 @@ class TestFileToS3Operator(unittest.TestCase):
     def test_execute(self):
         conn = boto3.client('s3')
         conn.create_bucket(Bucket=self.dest_bucket)
-        operator = LocalFilesystemToS3Operator(
+        operator = S3UploadOperator(
             task_id='s3_to_file_sensor',
             dag=self.dag,
             filename=self.testfile1,

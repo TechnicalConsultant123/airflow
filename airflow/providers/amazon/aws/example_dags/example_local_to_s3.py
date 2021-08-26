@@ -19,7 +19,7 @@
 import os
 
 from airflow import models
-from airflow.providers.amazon.aws.transfers.local_to_s3 import LocalFilesystemToS3Operator
+from airflow.providers.amazon.aws.operators.s3_upload import S3UploadOperator
 from airflow.utils.dates import datetime
 
 S3_BUCKET = os.environ.get("S3_BUCKET", "test-bucket")
@@ -31,7 +31,7 @@ with models.DAG(
     start_date=datetime(2021, 1, 1),  # Override to match your needs
 ) as dag:
     # [START howto_local_transfer_data_to_s3]
-    create_local_to_s3_job = LocalFilesystemToS3Operator(
+    create_local_to_s3_job = S3UploadOperator(
         task_id="create_local_to_s3_job",
         filename="relative/path/to/file.csv",
         dest_key=S3_KEY,

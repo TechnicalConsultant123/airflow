@@ -21,7 +21,7 @@ from airflow.models import BaseOperator
 from airflow.providers.amazon.aws.hooks.s3 import S3Hook
 
 
-class LocalFilesystemToS3Operator(BaseOperator):
+class S3UploadOperator(BaseOperator):
     """
     Uploads a file from a local filesystem to Amazon S3.
 
